@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Board from './componants/Border.js';
 import calculateWinner  from './componants/helpore.js';
-
+import History from './componants/History.js';
 import './style_componants/style.scss';
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
 
   const current = history[currentMove];
 
-  console.log('history', history);
+  // console.log('history', history);
 
   const winner = calculateWinner(current.board);
   const message = winner
@@ -40,12 +40,16 @@ const App = () => {
 
     setCurrentMove(prev => prev + 1);
   };
+  const moveTo = (move)=>{
+    setCurrentMove(move);
+  }
 
   return (
     <div className="app">
       <h1>TIC TAC TOE</h1>
       <h2>{message}</h2>
       <Board board={current.board} handleSquareClick={handleSquareClick} />
+      <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
   );
 };
