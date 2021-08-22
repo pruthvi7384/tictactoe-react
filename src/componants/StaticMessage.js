@@ -7,9 +7,9 @@ function StaticMessage({winner,current}) {
 
     const noMoveLeft = current.board.every(el => el !==null);
     return (
-        <h2>
-            {winner && !noMoveLeft && `Winner is ${winner} !`}{!winner && `Next player is ${current.isXNext ? 'X' : 'O'} !`}{!winner && noMoveLeft && 'X and O tied !'}
-        </h2>
+        <div className="status-message">
+            {winner && !noMoveLeft && <>Winner is <span className={winner === 'X' ? 'text-green' : 'text-orange'}>${winner} !</span></>}{!winner && <>Next player is <span  className={winner === 'X' ? 'text-green' : 'text-orange'}>{current.isXNext ? 'X' : 'O'} !</span></>}{!winner && noMoveLeft && <> <span className="text-green">X</span> <span className="text-orange">O</span> tied !</>}
+        </div>
     )
 }
 
