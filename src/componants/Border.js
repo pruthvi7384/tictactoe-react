@@ -1,13 +1,13 @@
 import React from 'react'
 import Square from './Square'
 
-function Border({borde , handaleSquareClick}) {
+function Border({board , handleSquareClick}) {
 
     const randerSquare = position=>{
         return (
             <Square 
-                value={borde[position]} onClick={()=>{
-                    handaleSquareClick(position);
+                value={board[position]} onClick={()=>{
+                    handleSquareClick(position);
                 }}
             />
         )

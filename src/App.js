@@ -1,40 +1,53 @@
-import React,{useState} from "react";
-import './style_componants/style.scss'
-import Border from './componants/Border.js';
-import calculateWinner from './componants/helpore.js'
+import React, { useState } from 'react';
+import Board from './componants/Border.js';
+import calculateWinner  from './componants/helpore.js';
 
-function App() {
-  
-  const [borde,setbox]=useState(Array(9).fill(null));
+import './style_componants/style.scss';
 
-  const [isXnext,setXisnext]=useState(false);
-  const winner = calculateWinner(borde);
-  const message = winner ? `Winner is ${winner}` : `Next Player is ${isXnext ? 'X' : 'O'}`;
-  console.log(winner);
-  console.log(borde);
+const App = () => {
+  const [history, setHistory] = useState([
+    { board: Array(9).fill(null), isXNext: true },
+  ]);
+  const [currentMove, setCurrentMove] = useState(0);
 
-  const handaleSquareClick = (position)=>{
-      if(borde[position] || winner){
-          return;
-      }
-      setbox((prv)=>{
-         return prv.map((square,pos)=>{
-              if(pos === position){
-                  return isXnext ? 'X' : 'O';
-              }
-              return square;
-          })
+  const current = history[currentMove];
+
+  console.log('history', history);
+
+  const winner = calculateWinner(current.board);
+  const message = winner
+    ? `Winner is ${winner}`
+    : `Next player is ${current.isXNext ? 'X' : 'O'}`;
+
+  const handleSquareClick = position => {
+    if (current.board[position] || winner) {
+      return;
+    }
+
+    setHistory(prev => {
+      const last = prev[prev.length - 1];
+
+      const newBoard = last.board.map((square, pos) => {
+        if (pos === position) {
+          return last.isXNext ? 'X' : 'O';
+        }
+
+        return square;
       });
-      setXisnext((prev)=> !prev);
+
+      return prev.concat({ board: newBoard, isXNext: !last.isXNext });
+    });
+
+    setCurrentMove(prev => prev + 1);
   };
+
   return (
-    
     <div className="app">
-      <h1>Tic Tac Toe !</h1>
+      <h1>TIC TAC TOE</h1>
       <h2>{message}</h2>
-      <Border borde={borde} handaleSquareClick={handaleSquareClick} />
+      <Board board={current.board} handleSquareClick={handleSquareClick} />
     </div>
   );
-}
+};
 
 export default App;
