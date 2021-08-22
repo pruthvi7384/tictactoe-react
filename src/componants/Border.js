@@ -1,27 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Square from './Square'
 
-function Border() {
-
-    const [borde,setbox]=useState(Array(9).fill(null));
-
-    const [isXnext,setXisnext]=useState(false);
-    console.log(borde);
-
-    const handaleSquareClick = (position)=>{
-        if(borde[position]){
-            return;
-        }
-        setbox((prv)=>{
-           return prv.map((square,pos)=>{
-                if(pos === position){
-                    return isXnext ? 'X' : 'O';
-                }
-                return square;
-            })
-        });
-        setXisnext((prev)=> !prev);
-    };
+function Border({borde , handaleSquareClick}) {
 
     const randerSquare = position=>{
         return (
