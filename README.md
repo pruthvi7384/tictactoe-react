@@ -2,7 +2,7 @@
 ## [Demo](https://tectactoegamereact.surge.sh/)
 --------
 
-I have created Movies search Application using React
+I have created simple game using REACT JS also Deployed using surge.sh [surge.sh](https://surge.sh/)
 ## Technology Used
 
 #### 1. `React js`
